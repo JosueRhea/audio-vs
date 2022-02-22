@@ -102,6 +102,9 @@ class Particle {
       this.pos.add(this.vel);
       this.pos.add(this.vel);
       this.pos.add(this.vel);
+      this.pos.add(this.vel);
+      this.pos.add(this.vel);
+      this.pos.add(this.vel);
     }
   }
 
