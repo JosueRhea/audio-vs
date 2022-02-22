@@ -5,15 +5,14 @@ const MAX_PARTICLES = 50;
 let img;
 let start = false;
 
+
 function preload() {
-  song = loadSound(
-    "https://ljinlovesongs.herokuapp.com/songs/611d590de7645fef6f6e0568"
-  );
-  img = loadImage("background.jpg");
+ song = loadSound("song.mp3");
+ img = loadImage("background.jpg");
 }
 
 function setup() {
-  createCanvas(255, 255);
+  createCanvas(window.innerWidth, window.innerHeight);
   angleMode(DEGREES);
   imageMode(CENTER);
   rectMode(CENTER);
@@ -34,11 +33,11 @@ function draw() {
   if (amp > 200) {
     rotate(random(-0.5, 0.5));
   }
-  image(img, 0, 0, width, height);
+  image(img, 0, 0, 1920, 1080);
   pop();
 
-  let alpha = map(amp, 0, 255, 100, 150);
-  fill(0, alpha);
+  let alpha = map(amp, 0, 255, 255, 0);
+    fill(0, alpha);
   noStroke();
   rect(0, 0, width, height);
   noFill();
@@ -49,7 +48,8 @@ function draw() {
     beginShape();
     for (let i = 0; i <= 180; i += 0.2) {
       let index = floor(map(i, 0, 180, 0, wave.length - 1));
-      let r = map(wave[index], -1, 1, 100, width / 4);
+
+      let r = map(wave[index], -1, 1, 150, width / 4);
 
       let x = r * sin(i) * t;
       let y = r * cos(i);
@@ -75,7 +75,7 @@ function draw() {
   }
 }
 
-function mousePressed() {
+function mouseClicked() {
   if (song.isPlaying()) {
     song.pause();
     noLoop();
@@ -88,10 +88,10 @@ function mousePressed() {
 
 class Particle {
   constructor() {
-    this.pos = p5.Vector.random2D().mult(80);
+    this.pos = p5.Vector.random2D().mult(100);
     this.vel = createVector(0, 0);
     this.acc = this.pos.copy().mult(random(0.0001, 0.000001));
-    this.w = random(3, 5);
+    this.w = random(3,5);
   }
 
   update(cond) {
